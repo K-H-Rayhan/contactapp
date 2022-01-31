@@ -23,7 +23,9 @@ yarn start
 expo start
 ```
 
-```####npm test```
+```
+#### npm test
+```
 Runs the jest test runner on your tests.
 
 ```####npm run ios```
