@@ -316,7 +316,7 @@ export default function AccountRoute() {
                 style={tw`w-40 text-center self-center rounded-full bg-black `}
                 onPress={submit}
               >
-                <Text style={tw`text-white text-base`}>SignUp</Text>
+                <Text style={tw`text-white text-base`}>SignUp Now</Text>
               </Button>
               <Text
                 style={tw`text-blue-600 text-base text-center mt-2`}
