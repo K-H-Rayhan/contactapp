@@ -1,4 +1,4 @@
-#React Native Contact App 
+# React Native Contact App 
 
 Contact app build using expo, react native, react-native-paper and tailwind-react-native-classnames
 
