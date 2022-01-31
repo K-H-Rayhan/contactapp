@@ -4,10 +4,10 @@ This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](
 
 It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
 
-## How to use
+## **How to use**
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
 
-```npm start```
+```**npm start**```
 
 Runs your app in development mode.
 
@@ -15,21 +15,21 @@ Open it in the Expo app on your phone to view it. It will reload if you save edi
 
 Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the --reset-cache flag to the start script:
 
-```bash
-npm start
+``` bash
+**npm start**
 # or
-yarn start
+**yarn start**
 # or
-expo start
+**expo start**
 ```
 
-```npm test```
+```**npm test**```
 Runs the jest test runner on your tests.
 
-```npm run ios```
+```**npm run ios**```
 Like npm start, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
 
-```npm run android```
+```**npm run android**```
 Like npm start, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see React Native docs for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of adb available to Create React Native App:
 
 Using Android Studio's adb
