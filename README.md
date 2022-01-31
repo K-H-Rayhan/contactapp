@@ -19,7 +19,7 @@ yarn start
 expo start
 ```
 
-npm test
+npm test [GitHub Pages](https://pages.github.com/).
 Runs the jest test runner on your tests.
 
 npm run ios
