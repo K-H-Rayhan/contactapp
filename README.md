@@ -1,4 +1,7 @@
 # React Native Contact App
+
+Contact app build using expo, react native, react-native-paper and tailwind-react-native-classnames
+
 <div style="display: flex">
 <img src="https://user-images.githubusercontent.com/83538046/151783259-ac7edeca-cd7d-4eb6-bfc9-db1e8997e772.PNG" width="33%">
 <img src="https://user-images.githubusercontent.com/83538046/151783278-68bd38b2-5ad4-471e-b1d1-e3dea9ce0640.PNG" width="33%">
