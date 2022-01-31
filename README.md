@@ -1,6 +1,6 @@
 
-<div style=" text-align: center">
-# React Native Contact App
+<div style=" text-align: center;width:100%">
+React Native Contact App
 </div>
 Contact app build using expo, react native, react-native-paper and tailwind-react-native-classnames
 
