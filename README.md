@@ -1,9 +1,10 @@
 # React Native Contact App
+<div style="display: flex">
 <img src="https://user-images.githubusercontent.com/83538046/151783259-ac7edeca-cd7d-4eb6-bfc9-db1e8997e772.PNG" width="33%">
 <img src="https://user-images.githubusercontent.com/83538046/151783278-68bd38b2-5ad4-471e-b1d1-e3dea9ce0640.PNG" width="33%">
 <img src="https://user-images.githubusercontent.com/83538046/151783273-a0b02567-f51e-4e0c-87e5-f70d4f3ea3e3.PNG" width="33%">
 
-
+</div>
 
  ## How to use
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
