@@ -1,5 +1,7 @@
-# React Native Contact App
 
+<div style="text-center
+# React Native Contact App
+</div>
 Contact app build using expo, react native, react-native-paper and tailwind-react-native-classnames
 
 <div style="display: flex">
