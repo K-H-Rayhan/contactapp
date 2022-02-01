@@ -94,110 +94,117 @@ export default function AccountRoute() {
   }, []);
 
   return user && user.phone != null ? (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <TouchableWithoutFeedback
-        onPress={
-          Platform.OS === "ios" || Platform.OS === "android"
-            ? Keyboard.dismiss
-            : ""
-        }
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <View style={tw`px-3  h-full bg-gray-50`}>
-          <Text style={tw`text-3xl text-center font-bold`}>Profile</Text>
-          <View>
-            <View
-              style={tw`w-20 h-20 bg-gray-300 self-center rounded-full mt-6`}
-            >
-              <MaterialIcons
-                style={styles.pictureHolder}
-                name="account-circle"
-                size={30}
-                color="white"
-              />
-            </View>
-            <Title style={tw`text-center font-bold text-2xl my-6`}>
-              {user.name}
-            </Title>
-            <Card theme={{ roundness: 9 }} style={styles.card}>
-              <Card.Content>
-                <Paragraph style={tw`text-left font-bold`}>
-                  <FontAwesome name="phone" size={15} color="black" />{" "}
-                  <Text style={tw`mb-2 text-left font-bold text-base`}>
-                    Phone
-                  </Text>
-                  {"\n"}
-                  <Text style={tw`text-left text-blue-500`}>{user.phone}</Text>
-                </Paragraph>
-              </Card.Content>
-            </Card>
-            <Card theme={{ roundness: 9 }} style={styles.card}>
-              <Card.Content>
-                <Paragraph style={tw`text-left font-bold`}>
-                  <Ionicons name="ios-mail" size={15} color="black" />{" "}
-                  <Text style={tw`mb-2 text-left font-bold text-base`}>
-                    Email
-                  </Text>
-                  {"\n"}
-                  <Text style={tw`text-left text-blue-500 pb-2`} icon="camera">
-                    {user.email}
-                  </Text>
-                </Paragraph>
-              </Card.Content>
-            </Card>
-            <Card
-              theme={{ roundness: 9 }}
-              style={styles.card}
-              onPress={showModal}
-            >
-              <Card.Content>
-                <Paragraph style={tw`text-left font-bold`}>
-                  <FontAwesome name="pencil" size={15} color="black" />{" "}
-                  <Text style={tw`mb-2 text-left font-bold text-base`}>
-                    Notes
-                  </Text>
-                  {" \n"}
-                  <Text style={tw`text-left text-black font-semibold`}>
-                    {notes}
-                  </Text>
-                </Paragraph>
-              </Card.Content>
-            </Card>
-            <Portal>
-              <Modal
-                visible={visible}
-                onDismiss={hideModal}
-                contentContainerStyle={styles.containerStyle}
+        <TouchableWithoutFeedback
+          onPress={
+            Platform.OS === "ios" || Platform.OS === "android"
+              ? Keyboard.dismiss
+              : ""
+          }
+        >
+          <View style={tw`px-3  h-full bg-gray-50`}>
+            <Text style={tw`text-3xl text-center font-bold`}>Profile</Text>
+            <View>
+              <View
+                style={tw`w-20 h-20 bg-gray-300 self-center rounded-full mt-6`}
               >
-                <TextInput
-                  mode="outlined"
-                  placeholder="Type Note"
-                  value={notes}
-                  multiline
-                  onChangeText={setNotes}
+                <MaterialIcons
+                  style={styles.pictureHolder}
+                  name="account-circle"
+                  size={30}
+                  color="white"
                 />
-              </Modal>
-            </Portal>
+              </View>
+              <Title style={tw`text-center font-bold text-2xl my-6`}>
+                {user.name}
+              </Title>
+              <Card theme={{ roundness: 9 }} style={styles.card}>
+                <Card.Content>
+                  <Paragraph style={tw`text-left font-bold`}>
+                    <FontAwesome name="phone" size={15} color="black" />{" "}
+                    <Text style={tw`mb-2 text-left font-bold text-base`}>
+                      Phone
+                    </Text>
+                    {"\n"}
+                    <Text style={tw`text-left text-blue-500`}>
+                      {user.phone}
+                    </Text>
+                  </Paragraph>
+                </Card.Content>
+              </Card>
+              <Card theme={{ roundness: 9 }} style={styles.card}>
+                <Card.Content>
+                  <Paragraph style={tw`text-left font-bold`}>
+                    <Ionicons name="ios-mail" size={15} color="black" />{" "}
+                    <Text style={tw`mb-2 text-left font-bold text-base`}>
+                      Email
+                    </Text>
+                    {"\n"}
+                    <Text
+                      style={tw`text-left text-blue-500 pb-2`}
+                      icon="camera"
+                    >
+                      {user.email}
+                    </Text>
+                  </Paragraph>
+                </Card.Content>
+              </Card>
+              <Card
+                theme={{ roundness: 9 }}
+                style={styles.card}
+                onPress={showModal}
+              >
+                <Card.Content>
+                  <Paragraph style={tw`text-left font-bold`}>
+                    <FontAwesome name="pencil" size={15} color="black" />{" "}
+                    <Text style={tw`mb-2 text-left font-bold text-base`}>
+                      Notes
+                    </Text>
+                    {" \n"}
+                    <Text style={tw`text-left text-black font-semibold`}>
+                      {notes}
+                    </Text>
+                  </Paragraph>
+                </Card.Content>
+              </Card>
+              <Portal>
+                <Modal
+                  visible={visible}
+                  onDismiss={hideModal}
+                  contentContainerStyle={styles.containerStyle}
+                >
+                  <TextInput
+                    mode="outlined"
+                    placeholder="Type Note"
+                    value={notes}
+                    multiline
+                    onChangeText={setNotes}
+                  />
+                </Modal>
+              </Portal>
+            </View>
+            <Text
+              style={styles.signOut}
+              onPress={async () => {
+                try {
+                  await AsyncStorage.removeItem("userEmail");
+                  await AsyncStorage.removeItem("userPhone");
+                  await AsyncStorage.removeItem("userName");
+                  return setUser(null);
+                } catch (exception) {
+                  return false;
+                }
+              }}
+            >
+              Sign Out
+            </Text>
           </View>
-          <Text
-            style={styles.signOut}
-            onPress={async () => {
-              try {
-                await AsyncStorage.removeItem("userEmail");
-                await AsyncStorage.removeItem("userPhone");
-                await AsyncStorage.removeItem("userName");
-                return setUser(null);
-              } catch (exception) {
-                return false;
-              }
-            }}
-          >
-            Sign Out
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   ) : (
     //Without Login
     <KeyboardAvoidingView
@@ -332,6 +339,10 @@ export default function AccountRoute() {
   );
 }
 const styles = StyleSheet.create({
+  safeArea:{
+    flex: 1,
+    backgroundColor: "rgb(249, 250, 251)"
+  },
   signOut: {
     position: "absolute",
     alignSelf: "center",
@@ -403,9 +414,5 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-  },
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#FF5236",
   },
 });

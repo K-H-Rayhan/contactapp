@@ -33,7 +33,7 @@ const KeyboardAvoidingComponent = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
-        <StatusBar StatusBarStyle="dark-content"/>
+        <StatusBar StatusBarStyle="dark-content" />
         <View onPress={Keyboard.dismiss}>
           <Text style={styles.header}>Contacts</Text>
           <Searchbar
@@ -45,7 +45,7 @@ const KeyboardAvoidingComponent = () => {
             caretHidden={false}
           />
           <FlatList
-            data={DATA.filter((e) => {
+            data={DATA.slice(0, 40).filter((e) => {
               if (
                 e.first_name.toLowerCase().startsWith(searchItem.toLowerCase())
               ) {
@@ -59,9 +59,13 @@ const KeyboardAvoidingComponent = () => {
               height:
                 Dimensions.get("screen").height < 900
                   ? Dimensions.get("screen").height -
-                    Dimensions.get("screen").height / 4
-                  : Dimensions.get("screen").height-
-                  Dimensions.get("screen").height / 7,
+                      Dimensions.get("screen").height / 4 -
+                      (Platform.OS ===
+                    "ios"
+                    ? 27
+                    : -1)
+                  : Dimensions.get("screen").height -
+                    Dimensions.get("screen").height / 7,
             }}
           />
           <FAB
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     margin: 16,
     right: 0,
-    bottom: Platform.OS === "ios" ? 30 : 50,
+    bottom: Platform.OS === "ios" ? 0 : 50,
   },
   xpop: {
     borderRadius: 100,
