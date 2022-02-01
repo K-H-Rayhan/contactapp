@@ -8,6 +8,8 @@ import {
   Keyboard,
   FlatList,
   Dimensions,
+  StatusBar,
+  SafeAreaView,
 } from "react-native";
 import { Searchbar, FAB } from "react-native-paper";
 import DATA from "./MOCK_DATA.json";
@@ -26,49 +28,58 @@ const KeyboardAvoidingComponent = () => {
     <Item first_name={item.first_name} last_name={item.last_name} />
   );
   return addContact ? (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <View onPress={Keyboard.dismiss}>
-        <Text style={styles.header}>Contacts</Text>
-        <Searchbar
-          iconColor="gray"
-          placeholderTextColor="lightgray"
-          placeholder="Search"
-          style={styles.xpop}
-          onChangeText={setSearchItem}
-          caretHidden={false}
-        />
-        <FlatList
-          data={DATA.filter((e) => {
-            if (
-              e.first_name.toLowerCase().startsWith(searchItem.toLowerCase())
-            ) {
-              return e;
-            }
-          })}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          nestedScrollEnabled
-          style={{
-            height:
-              Dimensions.get("screen").height -
-              Dimensions.get("screen").height / 4,
-          }}
-        />
-        <FAB
-          style={styles.fab}
-          small={false}
-          icon="plus"
-          onPress={() => setAddContact(!addContact)}
-        />
-      </View>
-    </KeyboardAvoidingView>
+    <SafeAreaView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+        <StatusBar StatusBarStyle="dark-content"/>
+        <View onPress={Keyboard.dismiss}>
+          <Text style={styles.header}>Contacts</Text>
+          <Searchbar
+            iconColor="gray"
+            placeholderTextColor="lightgray"
+            placeholder="Search"
+            style={styles.xpop}
+            onChangeText={setSearchItem}
+            caretHidden={false}
+          />
+          <FlatList
+            data={DATA.filter((e) => {
+              if (
+                e.first_name.toLowerCase().startsWith(searchItem.toLowerCase())
+              ) {
+                return e;
+              }
+            })}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            nestedScrollEnabled
+            style={{
+              height:
+                Dimensions.get("screen").height < 900
+                  ? Dimensions.get("screen").height -
+                    Dimensions.get("screen").height / 4
+                  : Dimensions.get("screen").height-
+                  Dimensions.get("screen").height / 7,
+            }}
+          />
+          <FAB
+            style={styles.fab}
+            small={false}
+            icon="plus"
+            onPress={() => setAddContact(!addContact)}
+          />
+          {console.log(Dimensions.get("screen").height)}
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   ) : (
-    <View>
-      <Text onPress={()=>setAddContact(!addContact)}>Done</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text onPress={() => setAddContact(!addContact)}>Done</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 // tw`bottom-14 right-3 absolute bg-gray-100 font-bold p-4 rounded-full`
@@ -77,7 +88,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     margin: 16,
     right: 0,
-    bottom: Platform.OS === "ios" ? 60 : 38,
+    bottom: Platform.OS === "ios" ? 30 : 50,
   },
   xpop: {
     borderRadius: 100,

@@ -354,13 +354,13 @@ const styles = StyleSheet.create({
   Xpop: {
     textAlign: "center",
     fontSize: 40,
-    marginTop: Dimensions.get("screen").height / 5,
+    marginTop: Dimensions.get("screen").height / 4,
     padding: 40,
   },
   Xpop2: {
     textAlign: "center",
     fontSize: 40,
-    marginTop: Dimensions.get("screen").height / 8,
+    marginTop: Dimensions.get("screen").height / 6,
     padding: 40,
   },
   centeredView: {
