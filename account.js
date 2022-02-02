@@ -149,7 +149,7 @@ export default function AccountRoute() {
                     <FontAwesome name="pencil" size={15} color="black" /> Notes
                   </Text>
                   <TextInput2
-                    style={{fontWeight:"bold", fontSize:13, marginTop:5}}
+                    style={{ fontWeight: "bold", fontSize: 13, marginTop: 5 }}
                     onChangeText={setNotes}
                     value={notes}
                     placeholder="Type Your Note"
@@ -227,10 +227,10 @@ export default function AccountRoute() {
                 style={tw`w-40 text-center self-center rounded-full bg-black`}
                 onPress={submit}
               >
-                <Text style={tw`text-white text-sm`}>Login</Text>
+                <Text style={tw`text-white text-base`}>Login</Text>
               </Button>
               <Text
-                style={tw`text-blue-600 text-base text-center mt-2`}
+                style={tw`text-blue-600 text-sm text-center mt-2`}
                 onPress={() => setSignUp(!signUp)}
               >
                 {signUp ? "SignUp" : "Login"}
@@ -293,10 +293,10 @@ export default function AccountRoute() {
                 style={tw`w-40 text-center self-center rounded-full bg-black `}
                 onPress={submit}
               >
-                <Text style={tw`text-white text-sm`}>SignUp</Text>
+                <Text style={tw`text-white text-base`}>SignUp</Text>
               </Button>
               <Text
-                style={tw`text-blue-600 text-base text-center mt-2`}
+                style={tw`text-blue-600 text-sm text-center mt-2`}
                 onPress={() => setSignUp(!signUp)}
               >
                 {signUp ? "SignUp" : "Login"}

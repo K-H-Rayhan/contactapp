@@ -83,7 +83,7 @@ const ContactPage = ({ navigation }) => {
             style={styles.fab}
             small={false}
             icon="plus"
-            onPress={() => ""}
+            disabled
           />
         </View>
       </KeyboardAvoidingView>

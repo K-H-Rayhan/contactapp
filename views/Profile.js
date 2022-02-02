@@ -22,7 +22,6 @@ import tw from "tailwind-react-native-classnames";
 const Profile = ({ route, navigation }) => {
   const [notes, setNotes] = useState("");
   const user = route.params;
-  console.log(user);
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
@@ -36,7 +35,14 @@ const Profile = ({ route, navigation }) => {
           }
         >
           <View style={tw`px-3  h-full bg-gray-50`}>
-              <Text style={tw`text-blue-600 `}  onPress={()=>{navigation.pop();}}>&#10094; Contacts</Text>
+            <Text
+              style={tw`text-blue-600 `}
+              onPress={() => {
+                navigation.pop();
+              }}
+            >
+              &#10094; Contacts
+            </Text>
             <View>
               <View
                 style={tw`w-20 h-20 bg-gray-300 self-center rounded-full mt-6`}
@@ -60,7 +66,10 @@ const Profile = ({ route, navigation }) => {
                       Phone
                     </Text>
                     {"\n"}
-                    <Text style={tw`text-left text-blue-500`}>
+                    <Text
+                      style={tw`text-left text-blue-500`}
+                      
+                    >
                       {user.ip_address}
                     </Text>
                   </Paragraph>
