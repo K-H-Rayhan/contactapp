@@ -11,17 +11,22 @@ import {
   StatusBar,
 } from "react-native";
 import { Searchbar, FAB } from "react-native-paper";
-import { SafeAreaView } from "react-native-web";
+import { SafeAreaView } from "react-native-safe-area-context";
 import DATA from "../MOCK_DATA.json";
-import Profile from "./Profile";
 
-const ContactPage = ({ addContact, setAddContact }) => {
-  const Item = ({ first_name, last_name }) => (
+const ContactPage = ({ navigation }) => {
+  const Item = ({ first_name, last_name, email, gender, ip_address }) => (
     <View style={styles.item}>
       <Text
         style={styles.first_name}
         onPress={() => {
-          <Profile />;
+          navigation.navigate("Profile", {
+            first_name,
+            last_name,
+            email,
+            gender,
+            ip_address,
+          });
         }}
       >
         {first_name} {last_name}
@@ -30,52 +35,59 @@ const ContactPage = ({ addContact, setAddContact }) => {
   );
   const [searchItem, setSearchItem] = useState("");
   const renderItem = ({ item }) => (
-    <Item first_name={item.first_name} last_name={item.last_name} />
+    <Item
+      first_name={item.first_name}
+      last_name={item.last_name}
+      email={item.email}
+      gender={item.gender}
+      ip_address={item.ip_address}
+    />
   );
-
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-      animated={true}
-    >
-      <View onPress={Keyboard.dismiss}>
-        <View>
-          <Text style={styles.header}>Contacts</Text>
-          <Searchbar
-            iconColor="gray"
-            placeholderTextColor="lightgray"
-            placeholder="Search"
-            style={styles.searchBar}
-            onChangeText={setSearchItem}
-            caretHidden={false}
-            selectionColor="#06c"
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        animated={true}
+      >
+        <View onPress={Keyboard.dismiss}>
+          <View>
+            <Text style={styles.header}>Contacts</Text>
+            <Searchbar
+              iconColor="gray"
+              placeholderTextColor="lightgray"
+              placeholder="Search"
+              style={styles.searchBar}
+              onChangeText={setSearchItem}
+              caretHidden={false}
+              selectionColor="#06c"
+            />
+          </View>
+          <FlatList
+            scrollToOverflowEnabled={true}
+            data={DATA.filter((e) => {
+              const name = e.first_name + " " + e.last_name;
+              if (
+                name.split(" ").filter((e) => {
+                  if (e.toLowerCase().startsWith(searchItem.toLowerCase()))
+                    return true;
+                }).length != 0
+              )
+                return e;
+            })}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            style={styles.flatList}
+          />
+          <FAB
+            style={styles.fab}
+            small={false}
+            icon="plus"
+            onPress={() => ""}
           />
         </View>
-        <FlatList
-          scrollToOverflowEnabled={true}
-          data={DATA.filter((e) => {
-            const name = e.first_name + " " + e.last_name;
-            if (
-              name.split(" ").filter((e) => {
-                if (e.toLowerCase().startsWith(searchItem.toLowerCase()))
-                  return true;
-              }).length != 0
-            )
-              return e;
-          })}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          style={styles.flatList}
-        />
-        <FAB
-          style={styles.fab}
-          small={false}
-          icon="plus"
-          onPress={() => setAddContact(!addContact)}
-        />
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -113,11 +125,11 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: "#fff",
     borderBottomWidth: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 13,
     borderBottomColor: "#DCDCDC",
   },
   first_name: {
+    paddingHorizontal: 15,
+    paddingVertical: 13,
     fontSize: 17,
   },
 });

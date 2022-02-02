@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import {
   Text,
@@ -19,8 +19,11 @@ import {
 } from "react-native";
 import tw from "tailwind-react-native-classnames";
 
-const Profile = () => {
-  return user ? (
+const Profile = ({ route, navigation }) => {
+  const [notes, setNotes] = useState("");
+  const user = route.params;
+  console.log(user);
+  return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -33,7 +36,7 @@ const Profile = () => {
           }
         >
           <View style={tw`px-3  h-full bg-gray-50`}>
-            <Text style={tw`text-3xl text-center font-bold`}>Profile</Text>
+              <Text style={tw`text-blue-600 `}  onPress={()=>{navigation.pop();}}>&#10094; Contacts</Text>
             <View>
               <View
                 style={tw`w-20 h-20 bg-gray-300 self-center rounded-full mt-6`}
@@ -46,18 +49,19 @@ const Profile = () => {
                 />
               </View>
               <Title style={tw`text-center font-bold text-2xl my-6`}>
-                {user.name}
+                {user.first_name + " " + user.last_name}
               </Title>
               <Card theme={{ roundness: 9 }} style={styles.card}>
                 <Card.Content>
                   <Paragraph style={tw`text-left font-bold`}>
-                    <FontAwesome name="phone" size={15} color="black" />{" "}
+                    <FontAwesome name="phone" size={15} color="black" />
                     <Text style={tw`mb-2 text-left font-bold text-base`}>
+                      {" "}
                       Phone
                     </Text>
                     {"\n"}
                     <Text style={tw`text-left text-blue-500`}>
-                      {user.phone}
+                      {user.ip_address}
                     </Text>
                   </Paragraph>
                 </Card.Content>
@@ -65,8 +69,9 @@ const Profile = () => {
               <Card theme={{ roundness: 9 }} style={styles.card}>
                 <Card.Content>
                   <Paragraph style={tw`text-left font-bold`}>
-                    <Ionicons name="ios-mail" size={15} color="black" />{" "}
+                    <Ionicons name="ios-mail" size={15} color="black" />
                     <Text style={tw`mb-2 text-left font-bold text-base`}>
+                      {" "}
                       Email
                     </Text>
                     {"\n"}
@@ -98,11 +103,22 @@ const Profile = () => {
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>
-  ) : (
-    <View><Text>User Profile</Text></View>
   );
 };
 
 export default Profile;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "rgb(249, 250, 251)",
+  },
+  pictureHolder: {
+    justifyContent: "center",
+    alignSelf: "center",
+    marginTop: 24,
+  },
+  card: {
+    marginBottom: 7,
+  },
+});
