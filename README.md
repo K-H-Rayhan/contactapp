@@ -1,4 +1,4 @@
-# React Native Contact App 
+# React Native Contact App
 
 Contact app build using expo, react native, react-native-paper and tailwind-react-native-classnames
 
@@ -9,10 +9,11 @@ Contact app build using expo, react native, react-native-paper and tailwind-reac
 
 </div>
 
- ## How to use
+## How to use
+
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
 
-__```npm start```__
+**`npm start`**
 
 Runs your app in development mode.
 
@@ -20,7 +21,7 @@ Open it in the Expo app on your phone to view it. It will reload if you save edi
 
 Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the --reset-cache flag to the start script:
 
-``` bash
+```bash
 npm start
 # or
 yarn start
@@ -28,15 +29,15 @@ yarn start
 expo start
 ```
 
-__```npm test```__
+**`npm test`**
 
 Runs the jest test runner on your tests.
 
-__```npm run ios```__
+**`npm run ios`**
 
 Like npm start, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
 
-__```npm run android```__
+**`npm run android`**
 
 Like npm start, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see React Native docs for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of adb available to Create React Native App:
 
