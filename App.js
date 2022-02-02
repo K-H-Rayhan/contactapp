@@ -6,7 +6,7 @@ import {
 } from "react-native-paper";
 import AccountRoute from "./account";
 import ContactRoute from "./contacts";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import { StyleSheet, SafeAreaView, View, StatusBar } from "react-native";
 const MyComponent = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -28,13 +28,14 @@ const MyComponent = () => {
     },
   };
   return (
-      <PaperProvider theme={theme} styles={styles.header}>
-        <BottomNavigation
-          navigationState={{ index, routes }}
-          onIndexChange={setIndex}
-          renderScene={renderScene}
-        />
-      </PaperProvider>
+    <PaperProvider theme={theme} styles={styles.header}>
+      <StatusBar backgroundColor="transparent" barStyle="dark-content" />
+      <BottomNavigation
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+      />
+    </PaperProvider>
   );
 };
 const styles = StyleSheet.create({

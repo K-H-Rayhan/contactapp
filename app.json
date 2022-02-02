@@ -28,6 +28,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Cross Platform react native contact app wih user signin\n",
+    "githubUrl": "https://github.com/K-H-Rayhan/contactapp.git"
   }
 }

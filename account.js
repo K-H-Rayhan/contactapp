@@ -53,9 +53,7 @@ export default function AccountRoute() {
         if (data.msg == "Wrong") setMessage("Wrong Credentials");
         else {
           try {
-            await AsyncStorage.setItem("userEmail", data.user.email);
-            await AsyncStorage.setItem("userName", data.user.name);
-            await AsyncStorage.setItem("userPhone", data.user.phone);
+            await AsyncStorage.setItem("user", JSON.stringify(data.user));
             setUser({
               name: data.user.name,
               email: data.user.email,
@@ -82,14 +80,7 @@ export default function AccountRoute() {
 
   useEffect(async () => {
     try {
-      const email = await AsyncStorage.getItem("userEmail");
-      const name = await AsyncStorage.getItem("userName");
-      const phone = await AsyncStorage.getItem("userPhone");
-      setUser({
-        name: name,
-        email: email,
-        phone: phone,
-      });
+      setUser(JSON.parse(await AsyncStorage.getItem("user")));
     } catch (e) {}
   }, []);
 
@@ -152,47 +143,26 @@ export default function AccountRoute() {
                   </Paragraph>
                 </Card.Content>
               </Card>
-              <Card
-                theme={{ roundness: 9 }}
-                style={styles.card}
-                onPress={showModal}
-              >
+              <Card theme={{ roundness: 9 }} style={styles.card}>
                 <Card.Content>
-                  <Paragraph style={tw`text-left font-bold`}>
-                    <FontAwesome name="pencil" size={15} color="black" />{" "}
-                    <Text style={tw`mb-2 text-left font-bold text-base`}>
-                      Notes
-                    </Text>
-                    {" \n"}
-                    <Text style={tw`text-left text-black font-semibold`}>
-                      {notes}
-                    </Text>
-                  </Paragraph>
+                  <Text style={tw`text-left font-bold text-base`}>
+                    <FontAwesome name="pencil" size={15} color="black" /> Notes
+                  </Text>
+                  <TextInput2
+                    style={{fontWeight:"bold", fontSize:13, marginTop:5}}
+                    onChangeText={setNotes}
+                    value={notes}
+                    placeholder="Type Your Note"
+                    keyboardType="default"
+                  />
                 </Card.Content>
               </Card>
-              <Portal>
-                <Modal
-                  visible={visible}
-                  onDismiss={hideModal}
-                  contentContainerStyle={styles.containerStyle}
-                >
-                  <TextInput
-                    mode="outlined"
-                    placeholder="Type Note"
-                    value={notes}
-                    multiline
-                    onChangeText={setNotes}
-                  />
-                </Modal>
-              </Portal>
             </View>
             <Text
               style={styles.signOut}
               onPress={async () => {
                 try {
-                  await AsyncStorage.removeItem("userEmail");
-                  await AsyncStorage.removeItem("userPhone");
-                  await AsyncStorage.removeItem("userName");
+                  await AsyncStorage.removeItem("user");
                   return setUser(null);
                 } catch (exception) {
                   return false;
@@ -218,7 +188,7 @@ export default function AccountRoute() {
         }
       >
         {signUp ? (
-          <View style={styles.Xpop}>
+          <View style={styles.searchBar}>
             <MaterialCommunityIcons
               name="login"
               size={30}
@@ -268,7 +238,7 @@ export default function AccountRoute() {
             </View>
           </View>
         ) : (
-          <View style={styles.Xpop2}>
+          <View style={styles.searchBar2}>
             <MaterialCommunityIcons
               name="account-multiple-outline"
               size={30}
@@ -339,9 +309,9 @@ export default function AccountRoute() {
   );
 }
 const styles = StyleSheet.create({
-  safeArea:{
+  safeArea: {
     flex: 1,
-    backgroundColor: "rgb(249, 250, 251)"
+    backgroundColor: "rgb(249, 250, 251)",
   },
   signOut: {
     position: "absolute",
@@ -362,13 +332,13 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 7,
   },
-  Xpop: {
+  searchBar: {
     textAlign: "center",
     fontSize: 40,
     marginTop: Dimensions.get("screen").height / 4,
     padding: 40,
   },
-  Xpop2: {
+  searchBar2: {
     textAlign: "center",
     fontSize: 40,
     marginTop: Dimensions.get("screen").height / 6,
