@@ -14,7 +14,7 @@ import { Searchbar, FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DATA from "../MOCK_DATA.json";
 
-const ContactPage = ({ navigation }) => {
+const AddContact = ({ navigation }) => {
   const Item = ({ first_name, last_name, email, gender, ip_address }) => (
     <View style={styles.item}>
       <Text
@@ -75,13 +75,13 @@ const ContactPage = ({ navigation }) => {
           keyExtractor={(item) => item.id}
           style={styles.flatList}
         />
-        <FAB style={styles.fab} small={false} icon="plus" disabled />
+        <FAB style={styles.fab} small={false} icon="plus" />
       </View>
     </SafeAreaView>
   );
 };
 
-export default React.memo(ContactPage);
+export default React.memo(AddContact);
 const styles = StyleSheet.create({
   flatList: {
     height:

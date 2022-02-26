@@ -41,7 +41,7 @@ export default function AccountRoute() {
   const [message, setMessage] = useState(null);
   const [notes, setNotes] = useState("");
   const submit = async (e) => {
-    fetch("http://192.168.0.126:3001/api/login", {
+    fetch("https://limitless-taiga-11177.herokuapp.com/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +60,7 @@ export default function AccountRoute() {
               phone: data.user.phone,
             });
           } catch (e) {
+            
             // saving error
           }
           setMessage("");
