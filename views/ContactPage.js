@@ -75,7 +75,7 @@ const ContactPage = ({ navigation }) => {
           keyExtractor={(item) => item.id}
           style={styles.flatList}
         />
-        <FAB style={styles.fab} small={false} icon="plus" disabled />
+        <FAB style={styles.fab} small={false} icon="plus" />
       </View>
     </SafeAreaView>
   );
